@@ -1,0 +1,49 @@
+<div class="form-wr">
+  <form name="vm.form.invoiceForm" ng-submit="vm.save(vm.form.invoiceForm.$valid)" novalidate autocomplete="off">
+    <fieldset>
+      <div class="form-row form-group" show-errors>
+        <input name="invoice" type="text" ng-model="vm.invoice.invoice" id="invoice" placeholder="invoice" required disabled>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <input name="invoice" type="text" ng-model="vm.invoice.client.companyName" id="companyName" placeholder="companyName" required disabled>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <input type="date" id="dateDue" name="dateDue" ng-model="vm.invoice.dateDue" placeholder="Date Due" required step="2">
+        <div ng-messages="vm.invoiceForm.dateDue.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">DateDue is required.</p>
+        </div>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <div class="select-wr">
+              <select ng-model="vm.invoice.amountDue.currency">
+                <option ng-repeat="(currency, symbol) in vm.currencySymbols" value="{{currency}}">{{currency}}</option>
+              </select>
+            </div>
+          </span>
+          <input type="text" id="amount" name="amount" ng-model="vm.invoice.amountDue.amount" placeholder="0.00">
+        </div>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <input type="text" id="tax" name="tax" ng-model="vm.invoice.tax" placeholder="Tax - inclusive of taxes">
+        <div ng-messages="vm.invoiceForm.tax.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Tax is required.</p>
+        </div>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <input type="text" id="description" name="description" ng-model="vm.invoice.description" placeholder="Description">
+        <div ng-messages="vm.invoiceForm.description.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">description is required.</p>
+        </div>
+      </div>
+      <div class="form-row form-group">
+        <button type="submit" ng-if="vm.invoice.status != 'paid'">{{vm.invoice._id ? 'Save' : 'Create'}}</button>
+      </div>
+      <div ng-show="vm.error" class="text-danger">
+        <strong ng-bind="vm.error"></strong>
+      </div>
+    </fieldset>
+  </form>
+</div>
+

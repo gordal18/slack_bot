@@ -1,0 +1,28 @@
+<div class="form-wr">
+  <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+    <fieldset>
+      <div class="form-row form-group" show-errors>
+        <input type="text" id="email" name="email" ng-model="vm.credentials.email" placeholder="Email" lowercase required>
+        <div ng-messages="vm.userForm.email.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Email is required.</p>
+        </div>
+      </div>
+      <div class="form-row form-group" show-errors>
+        <input type="password" id="password" name="password" ng-model="vm.credentials.password" placeholder="Password" required>
+        <div ng-messages="vm.userForm.password.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Password is required.</p>
+        </div>
+      </div>
+      <div class="text-center form-row form-group">
+        <button type="submit">SIGN IN</button>
+      </div>
+      <div class="text-center forgot-password">
+        <a ui-sref="password.forgot">Forgot your password?</a>
+      </div>
+      <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+        <span ng-bind="vm.error"></span>
+      </uib-alert>
+    </fieldset>
+  </form>
+</div>
+</div>

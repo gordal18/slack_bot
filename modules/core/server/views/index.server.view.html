@@ -1,0 +1,14 @@
+{% extends 'layout.server.view.html' %}
+
+{% block content %}
+  <div ui-view="home" autoscroll="true"></div>
+  <div>
+    <div ui-view="header"></div>
+    <div class="content">
+      <div class="container">
+  		<section ui-view="container"></section>
+      </div>
+    </div>
+    <footer ui-view="footer"></footer>
+  </div>
+{% endblock %}

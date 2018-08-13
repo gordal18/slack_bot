@@ -1,0 +1,39 @@
+
+<a href="#" class="btn-close" ng-click="$close(false)"><img src="/modules/core/client/img/i-close.png" alt=""></a>
+  
+<div class="form-wr">
+  <form id="payment-form" ng-submit="vm.pay(vm.form.invoiceForm.$valid)" novalidate autocomplete="off">
+    <div class="text-danger">
+      <strong ng-if="vm.errorCode != 'not-strpe-connected'" ng-bind="vm.error"></strong>
+      <strong ng-if="vm.errorCode == 'not-strpe-connected'">Stripe not connected</strong>
+    </div>
+     <div class="form-row">
+      <label>
+        <input type="text" size="20" ng-model="vm.invoice.client.companyName" placeholder="Email" disabled>
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        <input type="text" size="20" data-stripe="number" ng-model="vm.details.number" placeholder="Card Number">
+      </label>
+    </div>
+
+    <div class="form-row exp-date">
+      <label>
+        <input type="text" size="2" data-stripe="exp_month" ng-model="vm.details.exp_month" placeholder="MM">
+      </label>
+      <span> / </span>
+      <input type="text" size="2" data-stripe="exp_year" ng-model="vm.details.exp_year" placeholder="YY">
+    </div>
+
+    <div class="form-row">
+      <label>
+        <input type="text" size="4" data-stripe="cvc" ng-model="vm.details.cvc" placeholder="CVC">
+      </label>
+    </div>
+    <button type="submit" ng-disabled="vm.loading">
+      <span ng-show="vm.loading"></i>Please Wait...</span>
+      <span ng-show="!vm.loading">Pay {{vm.invoice.amountDue.amount | currency:vm.currencySymbols[vm.invoice.amountDue.currency]}} {{vm.invoice.amountDue.currency}}</span>
+    </button>
+  </form>
+</div>

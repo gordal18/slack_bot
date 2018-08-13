@@ -1,0 +1,30 @@
+<div class="fixed-btm-wr fixed-btm-invoice">
+  <div class="container">
+    <h4 class="color-light-gray">From</h4>
+    <h4 class="invoice_from_btm color-dark">{{vm.invoice.user.companyName}}</h4>
+    <div class="tooltip-wr hidden-550">
+      <img src="modules/core/client/img/i-info.png" alt="">
+      <div class="tool-tip slideIn top">This invoice was sent by a verified representative from  {{vm.invoice.user.companyName}}.</div>
+    </div>
+    <span class="invoice-data-item color-light-blue">{{vm.invoice.dateIssued | date:'MMM dd'}}</span>
+    <div class="invoice-submenu" ng-if="vm.authentication && vm.authentication.user.id == vm.invoice.user._id">
+      <i class="btn-dots"><img src="modules/core/client/img/i-dots.png" alt=""></i>
+      <ul>
+        <li ng-if="vm.invoice.status != 'paid'"><a href="#" ui-sref="invoices.edit({ invoiceId: vm.invoice._id })">Edit Invoice</a></li>
+        <li><a href="#" ng-click="vm.remove()">Delete Invoice</a></li>
+      </ul>
+    </div>
+    <div class="invoice-by">
+      <span class="hidden-550">Invoice powered by</span> <a href="https://www.nowdue.ai"><span class="hidden-550">Nowdue</span><i><img src="modules/core/client/img/i-nowdue.png" alt=""></i></a>
+    </div>
+    <div class="invoice-submenu" ng-if="!(vm.authentication.user.id == vm.invoice.user._id)">
+      <i class="btn-dots"><img src="modules/core/client/img/i-dots.png" alt=""></i>
+      <ul>
+        <li><a href="mailto:hello@nowdue.ai">Report</a></li>
+      </ul>
+    </div>
+  </div><!-- END of .container -->
+  <div class="invoice-btn">
+    <a href="#" ng-click="vm.payNow(vm.invoice)" class="btn-1" ng-if="vm.invoice.status != 'paid'">Pay <span>{{vm.invoice.amountDue.amount | currency:vm.currencySymbols[vm.invoice.amountDue.currency]}} {{vm.invoice.amountDue.currency}}</span></a>
+  </div>
+</div><!-- END of .fixed-btm-wr -->

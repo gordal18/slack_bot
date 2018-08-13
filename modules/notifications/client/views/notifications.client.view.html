@@ -1,0 +1,44 @@
+<div class="notifications-wr">
+  <div class="notifications-group" ng-if="!vm.authentication.user.integrations.stripe && vm.authentication.user.roles.indexOf('teammanager') > -1">
+    <div class="img-wr">
+      <img src="/modules/core/client/img/i-info.png" alt="">
+    </div>
+    <h5>Info</h5>
+    <div class="info-box">
+      <p>Before you can send invoices please connect or create a <a href="#" ng-click="vm.callOauthProvider('/api/auth/stripe')">Stripe</a> account to accept payments.</p>
+    </div><!-- END of .info-box -->
+  </div><!-- END of .notifications-group -->
+  <!-- 
+  <div class="notifications-group">
+    <div class="img-wr">
+      <img src="/modules/core/client/img/data/i-user-1.jpg" alt="">
+    </div>
+    <h5>Dot</h5>
+    <div class="notifications-item">
+      <div class="notifications-item-text">
+        <p>I sent <a href="invoices.html">Golden Eye</a> a friendly <a href="clients.html">reminder</a> that they have an <a href="clients.html">invoice</a> that is 3 days overdue</p>
+      </div>
+      <h6>11:18am</h6>
+    </div>
+    <div class="notifications-item">
+      <div class="notifications-item-text">
+        <p>Sent <a href="clients.html">invoice</a> to <a href="invoices.html">Motion Authors</a></p>
+      </div>
+      <h6>2:47pm</h6>
+    </div>
+  </div>--><!-- END of .notifications-group -->
+  <div class="notifications-group" data-ng-repeat="notification in vm.notifications">
+    <div class="notifications-item">
+      <div class="notifications-item-text" ng-bind-html="notification.description | unsafe"></div>
+      <h6>{{notification.created | date}}</h6>
+    </div>
+  </div><!-- END of .notifications-group -->
+</div><!-- END of .notifications-wr -->
+<div class="fixed-btm-wr notifications-form-wr">
+  <div class="container">
+    <form ng-submit="vm.sendMessage();">
+      <input type="text" id="messageText" name="messageText" ng-model="vm.messageText" placeholder="Make a request or ask a question" required>
+      <input type="submit" value="Send">
+    </form>
+  </div><!-- END of .container -->
+</div><!-- END of .fixed-btm-wr -->
